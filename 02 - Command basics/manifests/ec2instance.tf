@@ -10,8 +10,8 @@ terraform {
 
 # Provider Block
 provider "aws" {
-  profile = "Kenmak" # AWS Credentials Profile configured on your local desktop terminal  $HOME/.aws/credentials
-  region  = "us-west-2"
+  profile = "default" # AWS Credentials Profile configured on your local desktop terminal  $HOME/.aws/credentials
+  region  = "us-east-1"
 }
 
 # Resource Block
