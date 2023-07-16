@@ -5,6 +5,8 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+*.exe*
+*.exe.*
 
 # Local .terraform directories
 **/.terraform/*
