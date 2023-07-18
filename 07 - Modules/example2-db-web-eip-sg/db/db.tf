@@ -1,6 +1,7 @@
 resource "aws_instance" "db" {
     ami = data.aws_ami.amzlinux2.id
     instance_type = "t2.micro"
+    key_name = var.my_key
 
     tags = {
         Name = "DB Server"
@@ -9,4 +10,9 @@ resource "aws_instance" "db" {
 
 output "PrivateIP" {
     value = aws_instance.db.private_ip
+}
+
+variable "my_key"{
+  type = string
+  default = "class31key"
 }

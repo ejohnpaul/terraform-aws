@@ -3,6 +3,8 @@ resource "aws_instance" "web" {
     instance_type = "t2.micro"
     security_groups = [module.sg.sg_name]
     user_data = file("./web/server-script.sh")
+    key_name = var.my_key
+    
     tags = {
         Name = "Web Server"
     }
@@ -19,4 +21,9 @@ module "eip" {
 
 module "sg" {
     source = "../sg"
+}
+
+variable "my_key"{
+  type = string
+  default = "class31key"
 }
