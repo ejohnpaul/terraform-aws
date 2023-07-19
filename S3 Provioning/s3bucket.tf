@@ -1,4 +1,3 @@
-# Terraform Block
 terraform {
   required_version = "~> 1.0" # which means any version equal & above 0.14 like 0.15, 0.16 etc and < 1.xx
   required_providers {
@@ -14,3 +13,19 @@ provider "aws" {
   region  = "us-east-1"
   profile = "default"
 }
+
+resource "aws_s3_bucket" "my_bucket" {
+  bucket = "my-terraformstate-jp-bucket"
+  acl    = "private"
+  versioning {
+    enabled = true
+  }
+
+  tags = {
+    Name        = "My terraform-bucket"
+    Environment = "Dev"
+  }
+}
+
+
+

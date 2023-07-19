@@ -7,18 +7,18 @@ terraform {
     }
   }
 }
-  # Provider Block
+# Provider Block
 provider "aws" {
-    region  = "us-west-1"
-    profile = "Kenmak"
-  }
+  region  = "us-east-1"
+  profile = "default"
+}
 
 data "terraform_remote_state" "network" {
   backend = "s3"
   config = {
-    bucket = "my-terraformstate-landmark-buc"
+    bucket = "my-terraformstate-jp-bucket"
     key    = "terraform/terraform.tfstate"
-    region = "us-west-1"
+    region = "us-east-1"
   }
 }
 
@@ -29,12 +29,12 @@ data "terraform_remote_state" "network" {
   }
 }*/
 
-resource "aws_instance" "my-ec2"{
-  ami = data.aws_ami.amzlinux2.id
+resource "aws_instance" "my-ec2" {
+  ami           = data.aws_ami.amzlinux2.id
   instance_type = "t2.micro"
-  subnet_id = data.terraform_remote_state.network.outputs.public_subnets[1]
+  subnet_id     = data.terraform_remote_state.network.outputs.private_subnets[1]
 
   tags = {
-    "Name" = "My_ec2"
+    "Name" = "My_Remote_ec2"
   }
 }

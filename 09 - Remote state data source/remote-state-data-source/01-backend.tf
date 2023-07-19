@@ -7,19 +7,18 @@ terraform {
     }
   }
 
-
   backend "s3" {
-    bucket = "my-terraformstate-landmark-buc"
-    key = "terraform/terraform.tfstate"
+    bucket         = "my-terraformstate-jp-bucket"
+    key            = "terraform/terraform.tfstate"
     dynamodb_table = "terraform-lock"
 
-    region = "us-west-1"
+    region = "us-east-1"
 
- }
+  }
 }
 
-/*resource "aws_s3_bucket" "my_bucket" {
-  bucket = "my-terraformstate-landmark-buc"
+resource "aws_s3_bucket" "my_bucket" {
+  bucket = "my-terraformstate-jp-bucket"
   acl    = "private"
 
   versioning {
@@ -30,24 +29,24 @@ terraform {
     Name        = "My terraform-bucket"
     Environment = "Dev"
   }
-}*/
+}
 
 resource "aws_dynamodb_table" "tf_lock" {
-  name = "terraform-lock"
-  hash_key = "LockID"
-  read_capacity = 3
+  name           = "terraform-lock"
+  hash_key       = "LockID"
+  read_capacity  = 3
   write_capacity = 3
   attribute {
-     name = "LockID"
-     type = "S"
-   }
+    name = "LockID"
+    type = "S"
+  }
   tags = {
     Name = "Terraform Lock Table"
-   }
- }
+  }
+}
 
- # Provider Block
+# Provider Block
 provider "aws" {
-   region  = "us-west-1"
-   profile = "Kenmak"
- }
+  region  = "us-east-1"
+  profile = "default"
+}
