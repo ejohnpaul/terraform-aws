@@ -7,16 +7,15 @@ terraform {
     }
   }
 
+}
 
   backend "s3" {
-    bucket = "my-terraformstate-landmark-buc"
+    bucket = "my-terraformstate-jp-bucket"
     key = "terraform/terraform.tfstate"
     dynamodb_table = "terraform-lock"
+    region = "us-east-1"
+    }
 
-    region = "us-west-1"
-
- }
-}
 
 /*resource "aws_s3_bucket" "my_bucket" {
   bucket = "my-terraformstate-landmark-buc"
@@ -48,6 +47,6 @@ resource "aws_dynamodb_table" "tf_lock" {
 
  # Provider Block
 provider "aws" {
-   region  = "us-west-1"
-   profile = "Kenmak"
+   region  = "us-east-1"
+   profile = "default"
  }
